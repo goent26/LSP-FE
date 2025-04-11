@@ -4,9 +4,9 @@ import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+
 const Index: React.FC = () => {
   const [activeTab, setActiveTab] = useState('skema');
-
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('nav');
