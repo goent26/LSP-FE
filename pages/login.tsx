@@ -1,22 +1,41 @@
+'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 export default function Login() {
+  const router = useRouter();
+
   return (
     <div className="relative flex flex-col items-center justify-start min-h-screen bg-gray-100 overflow-auto">
+      {/* Background Images */}
       <img src="/garis_belakang.png" alt="Background Line" className="bg-line bottom-left back" />
       <img src="/garis_depan.png" alt="Front Line" className="bg-line bottom-left front" />
       <img src="/gariss_belakang.png" alt="Background Line" className="bg-line top-right back" />
       <img src="/gariss_depan.png" alt="Front Line" className="bg-line top-right front" />
 
-      <div className="login-container text-center">
-        <img src="/icon.png" alt="Logo" className="logo mx-auto" />
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }} className="inline-flex gap-2">
+      {/* Konten Utama */}
+      <div className="login-container text-center relative max-w-md w-full bg-white p-6 rounded-lg shadow-md">
+        {/* Tombol Back di pojok kiri dalam kotak */}
+<button
+  onClick={() => router.push('/')}
+  className="absolute top-4 left-4 flex items-center gap-2 text-gray-800 hover:underline text-lg"
+>
+  <ArrowLeft size={24} />
+  <span className="font-semibold">Back</span>
+</button>
+
+
+        {/* Logo dan Teks Selamat Datang */}
+        <img src="/icon.png" alt="Logo" className="logo mx-auto mt-12" />
+        <h1 className="inline-flex gap-2 mt-4 text-2xl font-bold">
           <span>Selamat</span>
           <span>Datang</span>
         </h1>
+
         <p className="subtitle">Pilih akun untuk masuk</p>
 
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 mt-6">
           <div className="button-group">
             <Link href="/login/peserta" className="login-button peserta">
               <img src="/peserta-icon.png" alt="Peserta" />
@@ -44,12 +63,12 @@ export default function Login() {
           </div>
         </div>
 
-        <footer className="mt-2">
+        <footer className="mt-6 text-sm text-gray-600">
           © LSP SMKN 58 Jakarta 2025. Hak Cipta Dilindungi oleh Undang-undang.<br />
           <span>Powered by ITHO INDOSTOCK</span>
         </footer>
 
-        <p className="mt-4">
+        <p className="mt-4 text-sm">
           Belum punya akun?{' '}
           <Link href="/register/peserta" className="text-blue-600 underline">
             Daftar di sini

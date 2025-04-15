@@ -5,10 +5,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { User, Home, MessageSquare, Mail, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import NavbarUser from '../../components/user/Navbar';
-import FooterUser from '../../components/user/Footer';
-import NavbarDefault from '../../components/Navbar';
-import FooterDefault from '../../components/Footer';
+import NavbarUser from '../../../components/user/Navbar';
+import FooterUser from '../../../components/user/Footer';
+import NavbarDefault from '../../../components/Navbar';
+import FooterDefault from '../../../components/Footer';
 
 const HubungiKami: React.FC = () => {
   const pathname = usePathname();

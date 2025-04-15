@@ -1,9 +1,13 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+'use client'; // jika menggunakan Next.js App Router
+
+import { useRouter } from 'next/navigation'; // Ubah dari next/router ke next/navigation untuk App Router
+import { useState, useRef } from 'react';
 
 export default function LoginForm() {
   const router = useRouter();
   const [showResetPopup, setShowResetPopup] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
   const handleBack = () => {
     router.back();
@@ -12,6 +16,14 @@ export default function LoginForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Login dikirim');
+    // Arahkan ke /student setelah submit
+    router.push('/student');
+  };
+
+  const togglePassword = () => {
+    if (passwordRef.current && checkboxRef.current) {
+      passwordRef.current.type = checkboxRef.current.checked ? 'text' : 'password';
+    }
   };
 
   return (
@@ -49,6 +61,7 @@ export default function LoginForm() {
               <label className="block text-xs sm:text-base font-bold mb-2">Password</label>
               <input
                 id="password"
+                ref={passwordRef}
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Password"
                 type="password"
@@ -58,10 +71,11 @@ export default function LoginForm() {
             <div className="flex justify-between items-center mb-5 sm:mb-7">
               <div className="flex items-center">
                 <input
+                  ref={checkboxRef}
                   className="mr-2 w-4 h-4 sm:w-5 sm:h-5"
                   id="show-password"
                   type="checkbox"
-                  onChange={() => togglePassword()}
+                  onChange={togglePassword}
                 />
                 <label className="text-gray-500 text-xs sm:text-base" htmlFor="show-password">
                   See Password
@@ -135,10 +149,4 @@ export default function LoginForm() {
       )}
     </div>
   );
-}
-
-function togglePassword() {
-  const passwordField = document.getElementById('password') as HTMLInputElement;
-  const checkbox = document.getElementById('show-password') as HTMLInputElement;
-  passwordField.type = checkbox.checked ? 'text' : 'password';
 }

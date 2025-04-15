@@ -66,12 +66,6 @@ const Index: React.FC = () => {
         <meta name="description" content="Lembaga Sertifikasi Profesi SMKN 58 Jakarta" />
       </Head>
 
-      {/* Background Image */}
-      {/* <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10 z-0"
-        style={{ backgroundImage: "url('/data.png')" }}
-      ></div> */}
-
       {/* Konten Utama */}
       <div className="relative z-10">
         <Navbar />
@@ -146,190 +140,203 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        <section className="container mx-auto relative z-10 mt-24">
-          <div className="flex justify-between items-center pb-2 mb-4">
-            <div className="flex space-x-4">
-              <a
-                className={`text-black tab-link ${activeTab === 'skema' ? 'active' : ''}`}
-                onClick={() => showTab('skema')}
-              >
-                DATA SKEMA
-              </a>
-              <a
-                className={`text-black tab-link ${activeTab === 'tuk' ? 'active' : ''}`}
-                onClick={() => showTab('tuk')}
-              >
-                DATA TUK
-              </a>
-              <a
-                className={`text-black tab-link ${activeTab === 'assesor' ? 'active' : ''}`}
-                onClick={() => showTab('assesor')}
-              >
-                DATA ASSESOR
-              </a>
+        <section 
+          className="w-full relative z-10 mt-32 pb-20"
+          style={{
+            backgroundImage: `url('/landing-download.png')`,
+            backgroundSize: '100% 100%', // Full layar
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            margin: 0,
+            paddingTop: '120px',  // Jarak atas lebih besar
+            paddingBottom: '120px', // Jarak bawah tetap
+          }}
+        >
+          <div className="bg-white bg-opacity-90 p-6 rounded-lg mx-auto max-w-7xl">
+            <div className="flex justify-between items-center pb-2 mb-4">
+              <div className="flex space-x-4">
+                <a
+                  className={`text-black tab-link ${activeTab === 'skema' ? 'active' : ''}`}
+                  onClick={() => showTab('skema')}
+                >
+                  DATA SKEMA
+                </a>
+                <a
+                  className={`text-black tab-link ${activeTab === 'tuk' ? 'active' : ''}`}
+                  onClick={() => showTab('tuk')}
+                >
+                  DATA TUK
+                </a>
+                <a
+                  className={`text-black tab-link ${activeTab === 'assesor' ? 'active' : ''}`}
+                  onClick={() => showTab('assesor')}
+                >
+                  DATA ASSESOR
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div id="skema-tab" className="tab-content active">
-            <div className="overflow-x-auto">
-              <table className="min-w-full border border-gray-200">
-                <thead>
-                  <tr className="bg-[#8D0000] text-white">
-                    <th className="py-2 px-4 border-r-2 border-white text-left">NOMOR</th>
-                    <th className="py-2 px-4 text-left">SKEMA</th>
-                    <th className="py-2 px-4 text-center w-16"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="skema-row" onClick={() => showPopup('dkv')}>
-                    <td className="py-2 px-4 border border-gray-200 text-center">1</td>
-                    <td className="py-2 px-4 border border-gray-200">
-                      Skema Okupasi Junior Operator Desain Grafis (DKV)
-                    </td>
-                    <td className="py-2 px-4 border border-gray-200 text-center">
-                      <span className="skema-badge">1</span>
-                    </td>
-                  </tr>
-                  <tr className="skema-row bg-[#D9D9D9]" onClick={() => showPopup('kkbt')}>
-                    <td className="py-2 px-4 border border-gray-200 text-center">2</td>
-                    <td className="py-2 px-4 border border-gray-200">
-                      Skema Okupasi Pembatik Tulis Junior (KKBT)
-                    </td>
-                    <td className="py-2 px-4 border border-gray-200 text-center">
-                      <span className="skema-badge">1</span>
-                    </td>
-                  </tr>
-                  <tr className="skema-row" onClick={() => showPopup('seni-lukis')}>
-                    <td className="py-2 px-4 border border-gray-200 text-center">3</td>
-                    <td className="py-2 px-4 border border-gray-200">
-                      Skema SKKNI Membuat Karya Seni Lukis Realis (Seni Lukis)
-                    </td>
-                    <td className="py-2 px-4 border border-gray-200 text-center">
-                      <span className="skema-badge">1</span>
-                    </td>
-                  </tr>
-                  <tr className="skema-row bg-[#D9D9D9]" onClick={() => showPopup('kkkr')}>
-                    <td className="py-2 px-4 border border-gray-200 text-center">4</td>
-                    <td className="py-2 px-4 border border-gray-200">
-                      Skema SKKNI Kriya Kreatif Kayu Dan Rotan (KKKR)
-                    </td>
-                    <td className="py-2 px-4 border border-gray-200 text-center">
-                      <span className="skema-badge">1</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div id="skema-tab" className="tab-content active">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border border-gray-200">
+                  <thead>
+                    <tr className="bg-[#8D0000] text-white">
+                      <th className="py-2 px-4 border-r-2 border-white text-left">NOMOR</th>
+                      <th className="py-2 px-4 text-left">SKEMA</th>
+                      <th className="py-2 px-4 text-center w-16"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="skema-row" onClick={() => showPopup('dkv')}>
+                      <td className="py-2 px-4 border border-gray-200 text-center">1</td>
+                      <td className="py-2 px-4 border border-gray-200">
+                        Skema Okupasi Junior Operator Desain Grafis (DKV)
+                      </td>
+                      <td className="py-2 px-4 border border-gray-200 text-center">
+                        <span className="skema-badge">1</span>
+                      </td>
+                    </tr>
+                    <tr className="skema-row bg-[#D9D9D9]" onClick={() => showPopup('kkbt')}>
+                      <td className="py-2 px-4 border border-gray-200 text-center">2</td>
+                      <td className="py-2 px-4 border border-gray-200">
+                        Skema Okupasi Pembatik Tulis Junior (KKBT)
+                      </td>
+                      <td className="py-2 px-4 border border-gray-200 text-center">
+                        <span className="skema-badge">1</span>
+                      </td>
+                    </tr>
+                    <tr className="skema-row" onClick={() => showPopup('seni-lukis')}>
+                      <td className="py-2 px-4 border border-gray-200 text-center">3</td>
+                      <td className="py-2 px-4 border border-gray-200">
+                        Skema SKKNI Membuat Karya Seni Lukis Realis (Seni Lukis)
+                      </td>
+                      <td className="py-2 px-4 border border-gray-200 text-center">
+                        <span className="skema-badge">1</span>
+                      </td>
+                    </tr>
+                    <tr className="skema-row bg-[#D9D9D9]" onClick={() => showPopup('kkkr')}>
+                      <td className="py-2 px-4 border border-gray-200 text-center">4</td>
+                      <td className="py-2 px-4 border border-gray-200">
+                        Skema SKKNI Kriya Kreatif Kayu Dan Rotan (KKKR)
+                      </td>
+                      <td className="py-2 px-4 border border-gray-200 text-center">
+                        <span className="skema-badge">1</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-          <div id="tuk-tab" className="tab-content">
-            <div className="overflow-x-auto">
-              <table className="min-w-full border border-gray-200">
-                <thead>
-                  <tr className="bg-[#8D0000] text-white">
-                    <th className="py-2 px-4 border border-gray-200 text-left">NOMOR</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">KODE</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">JENIS</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">NAMA</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">ALAMAT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">1</td>
-                    <td className="py-2 px-4 border border-gray-200">008.a/SK/LSP SMKN58JKT/III/2019</td>
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">Desain Permodelan Dan Informasi Bangunan</td>
-                    <td className="py-2 px-4 border border-gray-200">Jl. SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
-                  </tr>
-                  <tr className="shadow-md bg-[#D9D9D9]">
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">008.b/SK/LSP SMKN58JKT/III/2019</td>
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">DKV</td>
-                    <td className="py-2 px-4 border border-gray-200">Jl SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
-                  </tr>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">3</td>
-                    <td className="py-2 px-4 border border-gray-200">008/SK/LSP SMKN58JKT/XI/2020</td>
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">Kriya Kreatif Kayu dan Rotan</td>
-                    <td className="py-2 px-4 border border-gray-200">Jl. SMIK 33 Bambu Apus Cipayung Jakarta Timur</td>
-                  </tr>
-                  <tr className="shadow-md bg-[#D9D9D9]">
-                    <td className="py-2 px-4 border border-gray-200">4</td>
-                    <td className="py-2 px-4 border border-gray-200">009.b/SK/LSP SMKN58JKT/III/2019</td>
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">Kriya Kreatif Batik dan Tekstil</td>
-                    <td className="py-2 px-4 border border-gray-200">Jl. SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
-                  </tr>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">5</td>
-                    <td className="py-2 px-4 border border-gray-200">NOMOR 010/B/LSP-P1SMKN58 JKT 2017</td>
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">Teknik Konstruksi Kayu</td>
-                    <td className="py-2 px-4 border border-gray-200">Jl smik bambu apus/tmii cipayung jakarta timu</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div id="tuk-tab" className="tab-content">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border border-gray-200">
+                  <thead>
+                    <tr className="bg-[#8D0000] text-white">
+                      <th className="py-2 px-4 border border-gray-200 text-left">NOMOR</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">KODE</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">JENIS</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">NAMA</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">ALAMAT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">1</td>
+                      <td className="py-2 px-4 border border-gray-200">008.a/SK/LSP SMKN58JKT/III/2019</td>
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">Desain Permodelan Dan Informasi Bangunan</td>
+                      <td className="py-2 px-4 border border-gray-200">Jl. SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
+                    </tr>
+                    <tr className="shadow-md bg-[#D9D9D9]">
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">008.b/SK/LSP SMKN58JKT/III/2019</td>
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">DKV</td>
+                      <td className="py-2 px-4 border border-gray-200">Jl SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
+                    </tr>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">3</td>
+                      <td className="py-2 px-4 border border-gray-200">008/SK/LSP SMKN58JKT/XI/2020</td>
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">Kriya Kreatif Kayu dan Rotan</td>
+                      <td className="py-2 px-4 border border-gray-200">Jl. SMIK 33 Bambu Apus Cipayung Jakarta Timur</td>
+                    </tr>
+                    <tr className="shadow-md bg-[#D9D9D9]">
+                      <td className="py-2 px-4 border border-gray-200">4</td>
+                      <td className="py-2 px-4 border border-gray-200">009.b/SK/LSP SMKN58JKT/III/2019</td>
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">Kriya Kreatif Batik dan Tekstil</td>
+                      <td className="py-2 px-4 border border-gray-200">Jl. SMIK Bambu Apus Cipayung/ TMII Jakarta Timur</td>
+                    </tr>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">5</td>
+                      <td className="py-2 px-4 border border-gray-200">NOMOR 010/B/LSP-P1SMKN58 JKT 2017</td>
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">Teknik Konstruksi Kayu</td>
+                      <td className="py-2 px-4 border border-gray-200">Jl smik bambu apus/tmii cipayung jakarta timu</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-          <div id="assesor-tab" className="tab-content">
-            <div className="overflow-x-auto">
-              <table className="min-w-full border border-gray-200">
-                <thead>
-                  <tr className="bg-[#8D0000] text-white">
-                    <th className="py-2 px-4 border border-gray-200 text-left">NOMOR</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">NAMA ASESOR</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">NO REGISTRASI</th>
-                    <th className="py-2 px-4 border border-gray-200 text-left">ALAMAT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">1</td>
-                    <td className="py-2 px-4 border border-gray-200">Arief Supriyadi, S.Pd</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.0016141.2019</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Selatan, DKI Jakarta</td>
-                  </tr>
-                  <tr className="shadow-md bg-[#D9D9D9]">
-                    <td className="py-2 px-4 border border-gray-200">2</td>
-                    <td className="py-2 px-4 border border-gray-200">Siti Latifah, S.Pd</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.0011101.2017</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Timur, DKI Jakarta</td>
-                  </tr>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">3</td>
-                    <td className="py-2 px-4 border border-gray-200">Dra. Sri Tulari Kurniasih</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.0011094.2017</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Depok, Jawa Barat</td>
-                  </tr>
-                  <tr className="shadow-md bg-[#D9D9D9]">
-                    <td className="py-2 px-4 border border-gray-200">4</td>
-                    <td className="py-2 px-4 border border-gray-200">VERIA WULANDARI</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.003243.2019</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Timur, DKI Jakarta</td>
-                  </tr>
-                  <tr className="shadow-md">
-                    <td className="py-2 px-4 border border-gray-200">5</td>
-                    <td className="py-2 px-4 border border-gray-200">Basit Abdillah</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.003244.2019</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Bekasi, Jawa Barat</td>
-                  </tr>
-                  <tr className="shadow-md bg-[#D9D9D9]">
-                    <td className="py-2 px-4 border border-gray-200">6</td>
-                    <td className="py-2 px-4 border border-gray-200">DENNY</td>
-                    <td className="py-2 px-4 border border-gray-200">MET.000.003232.2019</td>
-                    <td className="py-2 px-4 border border-gray-200">Kota Bekasi, Jawa Barat</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div id="assesor-tab" className="tab-content">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border border-gray-200">
+                  <thead>
+                    <tr className="bg-[#8D0000] text-white">
+                      <th className="py-2 px-4 border border-gray-200 text-left">NOMOR</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">NAMA ASESOR</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">NO REGISTRASI</th>
+                      <th className="py-2 px-4 border border-gray-200 text-left">ALAMAT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">1</td>
+                      <td className="py-2 px-4 border border-gray-200">Arief Supriyadi, S.Pd</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.0016141.2019</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Selatan, DKI Jakarta</td>
+                    </tr>
+                    <tr className="shadow-md bg-[#D9D9D9]">
+                      <td className="py-2 px-4 border border-gray-200">2</td>
+                      <td className="py-2 px-4 border border-gray-200">Siti Latifah, S.Pd</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.0011101.2017</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Timur, DKI Jakarta</td>
+                    </tr>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">3</td>
+                      <td className="py-2 px-4 border border-gray-200">Dra. Sri Tulari Kurniasih</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.0011094.2017</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Depok, Jawa Barat</td>
+                    </tr>
+                    <tr className="shadow-md bg-[#D9D9D9]">
+                      <td className="py-2 px-4 border border-gray-200">4</td>
+                      <td className="py-2 px-4 border border-gray-200">VERIA WULANDARI</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.003243.2019</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Administrasi Jakarta Timur, DKI Jakarta</td>
+                    </tr>
+                    <tr className="shadow-md">
+                      <td className="py-2 px-4 border border-gray-200">5</td>
+                      <td className="py-2 px-4 border border-gray-200">Basit Abdillah</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.003244.2019</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Bekasi, Jawa Barat</td>
+                    </tr>
+                    <tr className="shadow-md bg-[#D9D9D9]">
+                      <td className="py-2 px-4 border border-gray-200">6</td>
+                      <td className="py-2 px-4 border border-gray-200">DENNY</td>
+                      <td className="py-2 px-4 border border-gray-200">MET.000.003232.2019</td>
+                      <td className="py-2 px-4 border border-gray-200">Kota Bekasi, Jawa Barat</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="w-full bg-white text-gray-800 mt-24 relative z-30">
+        <section className="w-full bg-white text-gray-800 mt-10 relative z-30">
           <h1 className="text-left text-2xl md:text-3xl font-bold mb-2 pl-32 mb-8 data-overview-title">
             DATA OVERVIEW
           </h1>
@@ -366,12 +373,12 @@ const Index: React.FC = () => {
               </div>
             </div>
             <div className="md:w-1/3 flex flex-col items-center justify-center mt-8 md:mt-0 md:ml-12">
-              <img
-                alt="Person working on a computer in a classroom setting"
-                className="hidden md:block rounded-lg w-full max-w-md h-auto mb-8"
-                src="data_overview.png"
-              />
-            </div>
+  <img
+    alt="Person working on a computer in a classroom setting"
+    className="hidden md:block rounded-lg w-full max-w-[300px] h-auto mb-8"  
+    src="data_overview.png"
+  />
+</div>
           </div>
         </section>
 
