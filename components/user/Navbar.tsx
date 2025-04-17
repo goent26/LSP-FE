@@ -5,6 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Poppins } from 'next/font/google';
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router';
+
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
 
@@ -13,6 +16,7 @@ const orang = '/user_icon.png';
 
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [helpDropdownOpen, setHelpDropdownOpen] = useState(false);
 
@@ -37,6 +41,12 @@ const Navbar: React.FC = () => {
   const isAsesor = pathname.startsWith('/Asesor');
   const isHelpActive =
     pathname.startsWith('/student/hubungi-kami') || pathname.startsWith('/student/FAQ');
+
+  const handleLogout = () => {
+    Cookies.remove('lsp-token', { path: '/' })
+    Cookies.remove('lsp-role', { path: '/' })
+    router.push('/login') // pindah ke halaman login
+  }
 
   return (
     <nav className={`flex justify-between items-center px-6 py-4 shadow ${poppins.className}`}>
@@ -135,10 +145,7 @@ const Navbar: React.FC = () => {
             <Link
               href="/login"
               className="block px-4 py-2 text-black hover:bg-gray-100"
-              onClick={() => {
-                localStorage.removeItem('lsp-token');
-                setDropdownOpen(false)
-              }}
+              onClick={handleLogout}
             >
               Logout
             </Link>

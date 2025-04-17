@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'; // Ubah dari next/router ke next/na
 import { useState, useRef } from 'react';
 import { login } from '@/Client/AuthClient'
 import { AxiosError } from 'axios';
+import Cookies from 'js-cookie'
 
 export default function LoginForm() {
   const router = useRouter();
@@ -26,7 +27,15 @@ export default function LoginForm() {
       const res = await login(form);
       const { token, user } = res.payload;
       if (user?.role === 'admin') {
-        localStorage.setItem('lsp-token', JSON.stringify(token));
+        Cookies.set('lsp-token', token, {
+          path: '/',
+          expires: 1, // 1 hari
+        })
+
+        Cookies.set('lsp-role', user.role, {
+          path: '/',
+          expires: 1,
+        })
         console.log('Login berhasil!', user, token);
         router.push('/admin');
       } else {

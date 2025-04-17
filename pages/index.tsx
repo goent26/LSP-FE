@@ -140,7 +140,7 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        <section 
+        <section
           className="w-full relative z-10 mt-32 pb-20"
           style={{
             backgroundImage: `url('/landing-download.png')`,
@@ -373,12 +373,12 @@ const Index: React.FC = () => {
               </div>
             </div>
             <div className="md:w-1/3 flex flex-col items-center justify-center mt-8 md:mt-0 md:ml-12">
-  <img
-    alt="Person working on a computer in a classroom setting"
-    className="hidden md:block rounded-lg w-full max-w-[300px] h-auto mb-8"  
-    src="data_overview.png"
-  />
-</div>
+              <img
+                alt="Person working on a computer in a classroom setting"
+                className="hidden md:block rounded-lg w-full max-w-[300px] h-auto mb-8"
+                src="data_overview.png"
+              />
+            </div>
           </div>
         </section>
 
