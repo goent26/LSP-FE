@@ -94,18 +94,16 @@ const Navbar: React.FC = () => {
                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow z-10 text-sm">
                   <Link
                     href="/student/hubungi-kami"
-                    className={`block px-4 py-2 text-black hover:bg-gray-100 ${
-                      pathname === '/student/hubungi-kami' ? 'font-bold text-red-700' : ''
-                    }`}
+                    className={`block px-4 py-2 text-black hover:bg-gray-100 ${pathname === '/student/hubungi-kami' ? 'font-bold text-red-700' : ''
+                      }`}
                     onClick={() => setHelpDropdownOpen(false)}
                   >
                     Hubungi Kami
                   </Link>
                   <Link
                     href="/student/FAQ"
-                    className={`block px-4 py-2 text-black hover:bg-gray-100 ${
-                      pathname === '/student/FAQ' ? 'font-bold text-red-700' : ''
-                    }`}
+                    className={`block px-4 py-2 text-black hover:bg-gray-100 ${pathname === '/student/FAQ' ? 'font-bold text-red-700' : ''
+                      }`}
                     onClick={() => setHelpDropdownOpen(false)}
                   >
                     FAQ
@@ -137,7 +135,10 @@ const Navbar: React.FC = () => {
             <Link
               href="/login"
               className="block px-4 py-2 text-black hover:bg-gray-100"
-              onClick={() => setDropdownOpen(false)}
+              onClick={() => {
+                localStorage.removeItem('lsp-token');
+                setDropdownOpen(false)
+              }}
             >
               Logout
             </Link>

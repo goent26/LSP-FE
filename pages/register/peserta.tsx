@@ -1,15 +1,47 @@
 import { useRouter } from 'next/router';
+import { registPeserta } from '@/Client/AuthClient'
+import { useState } from 'react';
+import { AxiosError } from 'axios';
+
 
 export default function RegisterPeserta() {
   const router = useRouter();
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  console.log('ini form', form)
 
   const handleBack = () => {
     router.back(); // Kembali ke halaman sebelumnya
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Pendaftaran Peserta dikirim');
+    try {
+      const res = await registPeserta({
+        username: form.username,
+        email: form.email,
+        password: form.password,
+        role: 'peserta',
+      });
+      console.log('ini message', res.message)
+      const { token } = res.payload;
+      console.log('ini token', token)
+
+      localStorage.setItem('lsp-token', token);
+
+      console.log('Pendaftaran berhasil!');
+      router.push('/student'); // arahkan ke halaman setelah daftar
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      console.error(err.response?.data?.message || 'Terjadi kesalahan saat mendaftar.');
+    }
   };
 
   return (
@@ -36,6 +68,10 @@ export default function RegisterPeserta() {
             <div className="mb-5">
               <label className="block text-sm font-semibold mb-2">Username</label>
               <input
+                name="username"
+                value={form.username}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-base border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Username"
                 type="text"
@@ -44,6 +80,10 @@ export default function RegisterPeserta() {
             <div className="mb-5">
               <label className="block text-sm font-semibold mb-2">Email</label>
               <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-base border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Email"
                 type="email"
@@ -52,7 +92,11 @@ export default function RegisterPeserta() {
             <div className="mb-5">
               <label className="block text-sm font-semibold mb-2">Password</label>
               <input
+                name="password"
                 id="password"
+                value={form.password}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-base border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Password"
                 type="password"
