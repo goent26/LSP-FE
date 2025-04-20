@@ -28,7 +28,6 @@ export default function RegisterPeserta() {
         username: form.username,
         email: form.email,
         password: form.password,
-        role: 'peserta',
       });
       console.log('ini message', res.message)
       const { token } = res.payload;
