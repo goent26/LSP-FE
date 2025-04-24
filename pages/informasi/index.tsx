@@ -289,29 +289,29 @@ const Informasi: React.FC = () => {
           </div>
           <div className="popup-body p-0">
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border-2 border-black">
+              <table className="min-w-full bg-white border-2 border-white">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="py-2 px-4 border-2 border-black text-left w-1/3">Kode Unit</th>
-                    <th className="py-2 px-4 border-2 border-black text-left">Nama Unit Kompetensi</th>
+                    <th className="py-2 px-4 border-2 border-white text-left w-1/3">Kode Unit</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Nama Unit Kompetensi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="py-2 px-4 border-2 border-black">TIK.MM01.007.01</td>
-                    <td className="py-2 px-4 border-2 border-black">Mengoperasikan Perangkat Lunak Desain Grafis</td>
+                    <td className="py-2 px-4 border-2 border-white">TIK.MM01.007.01</td>
+                    <td className="py-2 px-4 border-2 border-white">Mengoperasikan Perangkat Lunak Desain Grafis</td>
                   </tr>
                   <tr className="bg-[#F3F4F6]">
-                    <td className="py-2 px-4 border-2 border-black">TIK.MM01.009.01</td>
-                    <td className="py-2 px-4 border-2 border-black">Mengoperasikan Perangkat Lunak Pengolah Gambar Vektor</td>
+                    <td className="py-2 px-4 border-2 border-white">TIK.MM01.009.01</td>
+                    <td className="py-2 px-4 border-2 border-white">Mengoperasikan Perangkat Lunak Pengolah Gambar Vektor</td>
                   </tr>
                   <tr>
-                    <td className="py-2 px-4 border-2 border-black">TIK.MM01.012.01</td>
-                    <td className="py-2 px-4 border-2 border-black">Mengoperasikan Perangkat Lunak Pengolah Gambar Bitmap</td>
+                    <td className="py-2 px-4 border-2 border-white">TIK.MM01.012.01</td>
+                    <td className="py-2 px-4 border-2 border-white">Mengoperasikan Perangkat Lunak Pengolah Gambar Bitmap</td>
                   </tr>
                   <tr className="bg-[#F3F4F6]">
-                    <td className="py-2 px-4 border-2 border-black">K3.LGM.027.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Melaksanakan Prosedur K3</td>
+                    <td className="py-2 px-4 border-2 border-white">K3.LGM.027.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Melaksanakan Prosedur K3</td>
                   </tr>
                 </tbody>
               </table>
@@ -328,25 +328,25 @@ const Informasi: React.FC = () => {
           </div>
           <div className="popup-body p-6">
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border-2 border-black">
+              <table className="min-w-full bg-white border-2 border-white">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="py-2 px-4 border-2 border-black text-left">Kode Unit</th>
-                    <th className="py-2 px-4 border-2 border-black text-left">Nama</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Kode Unit</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Nama</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKBT.001.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Mempersiapkan Proses Pembatikan</td>
+                    <td className="py-2 px-4 border-2 border-white">KKBT.001.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Mempersiapkan Proses Pembatikan</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKBT.002.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Membuat Desain Batik</td>
+                    <td className="py-2 px-4 border-2 border-white">KKBT.002.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Membuat Desain Batik</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKBT.003.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Melakukan Proses Pembatikan</td>
+                    <td className="py-2 px-4 border-2 border-white">KKBT.003.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Melakukan Proses Pembatikan</td>
                   </tr>
                 </tbody>
               </table>
@@ -365,25 +365,25 @@ const Informasi: React.FC = () => {
           </div>
           <div className="popup-body p-6">
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border-2 border-black">
+              <table className="min-w-full bg-white border-2 border-white">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="py-2 px-4 border-2 border-black text-left">Kode Unit</th>
-                    <th className="py-2 px-4 border-2 border-black text-left">Nama</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Kode Unit</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Nama</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">SLR.001.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Mempersiapkan Bahan dan Alat Melukis</td>
+                    <td className="py-2 px-4 border-2 border-white">SLR.001.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Mempersiapkan Bahan dan Alat Melukis</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">SLR.002.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Membuat Sketsa Lukisan</td>
+                    <td className="py-2 px-4 border-2 border-white">SLR.002.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Membuat Sketsa Lukisan</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">SLR.003.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Mewarnai Lukisan</td>
+                    <td className="py-2 px-4 border-2 border-white">SLR.003.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Mewarnai Lukisan</td>
                   </tr>
                 </tbody>
               </table>
@@ -400,25 +400,25 @@ const Informasi: React.FC = () => {
           </div>
           <div className="popup-body p-6">
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border-2 border-black">
+              <table className="min-w-full bg-white border-2 border-white">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="py-2 px-4 border-2 border-black text-left">Kode Unit</th>
-                    <th className="py-2 px-4 border-2 border-black text-left">Nama</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Kode Unit</th>
+                    <th className="py-2 px-4 border-2 border-white text-left">Nama</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKR.001.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Mempersiapkan Bahan dan Alat Kriya</td>
+                    <td className="py-2 px-4 border-2 border-white">KKR.001.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Mempersiapkan Bahan dan Alat Kriya</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKR.002.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Membuat Desain Produk Kriya</td>
+                    <td className="py-2 px-4 border-2 border-white">KKR.002.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Membuat Desain Produk Kriya</td>
                   </tr>
                   <tr className="shadow-md">
-                    <td className="py-2 px-4 border-2 border-black">KKR.003.A</td>
-                    <td className="py-2 px-4 border-2 border-black">Membuat Produk Kriya</td>
+                    <td className="py-2 px-4 border-2 border-white">KKR.003.A</td>
+                    <td className="py-2 px-4 border-2 border-white">Membuat Produk Kriya</td>
                   </tr>
                 </tbody>
               </table>

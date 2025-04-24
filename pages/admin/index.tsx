@@ -1,7 +1,7 @@
 
 'use client';
 
- 
+
 import Navbar from '../../components/user/Navbar';
 import Footer from '../../components/user/Footer';
 import Header from '../../components/Header';
