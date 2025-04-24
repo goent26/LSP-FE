@@ -10,10 +10,10 @@ import Cookies from 'js-cookie';
 export default function LoginForm() {
   const router = useRouter();
   const [showResetPopup, setShowResetPopup] = useState(false);
-  const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const passwordRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
+  const [form, setForm] = useState({ email: '', password: '' });
 
   const handleBack = () => {
     router.back();
@@ -133,10 +133,6 @@ export default function LoginForm() {
             <div className="mb-4 sm:mb-6">
               <label className="block text-xs sm:text-base font-bold mb-2">Password</label>
               <input
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                required
                 id="password"
                 ref={passwordRef}
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"

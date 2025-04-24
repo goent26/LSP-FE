@@ -20,6 +20,12 @@ export default function LoginForm() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
 
+  const handleBack = () => {
+    router.back();
+  };
+
+
+
   const togglePassword = () => {
     if (passwordRef.current && checkboxRef.current) {
       passwordRef.current.type = checkboxRef.current.checked ? 'text' : 'password';
@@ -165,8 +171,6 @@ export default function LoginForm() {
             <div className="mb-4">
               <label className="block font-bold mb-1">Password</label>
               <input
-                ref={passwordRef}
-                type="password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
@@ -211,9 +215,8 @@ export default function LoginForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-1/2 py-2 px-4 text-white rounded-md ${
-                  loading ? 'bg-gray-400' : 'bg-red-700 hover:bg-red-800'
-                }`}
+                className={`w-1/2 py-2 px-4 text-white rounded-md ${loading ? 'bg-gray-400' : 'bg-red-700 hover:bg-red-800'
+                  }`}
               >
                 {loading ? 'Memproses...' : 'Masuk'}
               </button>

@@ -153,7 +153,7 @@ const Index: React.FC = () => {
                   <i className="fas fa-envelope fa-lg"></i>
                 </div>
               </div>
-              
+
               <div className="mt-6 md:mt-0 flex-1 flex flex-col justify-center">
                 <h2 className="font-bold text-4xl uppercase tracking-wide mb-2">PROFIL LSP</h2>
                 <p className="text-sm mb-4 font-semibold">
@@ -227,8 +227,8 @@ const Index: React.FC = () => {
               <div className="absolute bottom-0 left-0 right-0 px-4 py-3 text-white rounded-b-lg text-black">
                 <p className="text-sm font-semibold">LSP SMKN 58 Jakarta</p>
                 <p className="text-xs font-bold whitespace-pre-line">
-                  UJI SERTIFIKASI KOMPETENSI LSP P-1 
-| SMKN 58 JAKARTA
+                  UJI SERTIFIKASI KOMPETENSI LSP P-1
+                  | SMKN 58 JAKARTA
                 </p>
               </div>
             </div>
@@ -247,8 +247,8 @@ const Index: React.FC = () => {
                   <div className="absolute bottom-0 left-0 right-0 px-2 py-2 text-white text-xs rounded-b-lg text-black">
                     <p className="font-semibold">LSP SMKN 58 Jakarta</p>
                     <p className="whitespace-pre-line">
-                      UJI SERTIFIKASI KOMPETENSI LSP P-1 
-| SMKN 58 Jakarta
+                      UJI SERTIFIKASI KOMPETENSI LSP P-1
+                      | SMKN 58 Jakarta
                     </p>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ const Index: React.FC = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative h-[300px] overflow-hidden rounded-lg">
-              <div 
+              <div
                 className="absolute top-0 left-0 h-full flex items-center gap-8"
                 style={{
                   transform: `translateX(-${sliderPosition}px)`,
@@ -276,8 +276,8 @@ const Index: React.FC = () => {
                 {[...Array(2)].map((_, arrayIndex) => (
                   <React.Fragment key={`set-${arrayIndex}`}>
                     {galleryImages.map((img, index) => (
-                      <div 
-                        key={`${arrayIndex}-${index}`} 
+                      <div
+                        key={`${arrayIndex}-${index}`}
                         className="w-[300px] h-[280px] flex-shrink-0"
                       >
                         <Image

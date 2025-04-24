@@ -6,7 +6,9 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Poppins } from 'next/font/google';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
+
+
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
 
@@ -15,13 +17,14 @@ const orang = '/user_icon.png';
 const arrow = '/panah-icon.png';
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [helpDropdownOpen, setHelpDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const helpRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname() || '';
-  const router = useRouter();
+
 
   // Handle click outside to close dropdowns
   useEffect(() => {
@@ -88,6 +91,12 @@ const Navbar: React.FC = () => {
   const isAdminBeranda = pathname === '/admin' || pathname === '/admin/';
   const isDataActive = pathname.startsWith('/admin/Data');
 
+  const handleLogout = () => {
+    Cookies.remove('lsp-token', { path: '/' })
+    Cookies.remove('lsp-role', { path: '/' })
+    router.push('/login') // pindah ke halaman login
+  }
+
   return (
     <nav
       className={`flex justify-between items-center px-4 sm:px-6 py-3 bg-white shadow-md ${poppins.className}`}
@@ -130,45 +139,40 @@ const Navbar: React.FC = () => {
           <>
             <Link
               href="/admin"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                isAdminBeranda ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${isAdminBeranda ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={isAdminBeranda ? 'page' : undefined}
             >
               Beranda
             </Link>
             <Link
               href="/admin/Data"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                isDataActive ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${isDataActive ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={isDataActive ? 'page' : undefined}
             >
               Data
             </Link>
             <Link
               href="/admin/Jadwal"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/admin/Jadwal' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/admin/Jadwal' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/admin/Jadwal' ? 'page' : undefined}
             >
               Jadwal
             </Link>
             <Link
               href="/admin/Penempatan"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/admin/Penempatan' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/admin/Penempatan' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/admin/Penempatan' ? 'page' : undefined}
             >
               Penempatan
             </Link>
             <Link
               href="/admin/Media"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/admin/Media' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/admin/Media' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/admin/Media' ? 'page' : undefined}
             >
               Media
@@ -178,45 +182,40 @@ const Navbar: React.FC = () => {
           <>
             <Link
               href="/Asesor"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/Asesor' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/Asesor' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/Asesor' ? 'page' : undefined}
             >
               Beranda
             </Link>
             <Link
               href="/Asesor/data-peserta"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/Asesor/data-peserta' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/Asesor/data-peserta' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/Asesor/data-peserta' ? 'page' : undefined}
             >
               Data Peserta
             </Link>
             <Link
               href="/Asesor/jadwal"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/Asesor/jadwal' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/Asesor/jadwal' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/Asesor/jadwal' ? 'page' : undefined}
             >
               Jadwal
             </Link>
             <Link
               href="/Asesor/skema"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/Asesor/skema' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/Asesor/skema' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/Asesor/skema' ? 'page' : undefined}
             >
               Skema
             </Link>
             <Link
               href="/Asesor/download"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/Asesor/download' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/Asesor/download' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/Asesor/download' ? 'page' : undefined}
             >
               Download
@@ -226,18 +225,16 @@ const Navbar: React.FC = () => {
           <>
             <Link
               href="/student"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/student' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/student' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/student' ? 'page' : undefined}
             >
               Beranda
             </Link>
             <Link
               href="/student/HasilAsesmen"
-              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${
-                pathname === '/student/HasilAsesmen' ? 'text-red-700 font-bold' : 'text-black'
-              }`}
+              className={`min-h-[48px] flex items-center hover:text-red-700 transition-colors ${pathname === '/student/HasilAsesmen' ? 'text-red-700 font-bold' : 'text-black'
+                }`}
               aria-current={pathname === '/student/HasilAsesmen' ? 'page' : undefined}
             >
               Hasil Asesmen
@@ -254,9 +251,8 @@ const Navbar: React.FC = () => {
                   Bantuan
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 ml-1 transition-transform ${
-                    helpDropdownOpen ? 'rotate-180' : ''
-                  }`}
+                  className={`w-4 h-4 ml-1 transition-transform ${helpDropdownOpen ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
               {helpDropdownOpen && (
@@ -267,9 +263,8 @@ const Navbar: React.FC = () => {
                 >
                   <Link
                     href="/student/hubungi-kami"
-                    className={`block px-4 py-2 text-black hover:bg-gray-100 min-h-[48px] ${
-                      pathname === '/student/hubungi-kami' ? 'font-bold text-red-700' : ''
-                    }`}
+                    className={`block px-4 py-2 text-black hover:bg-gray-100 min-h-[48px] ${pathname === '/student/hubungi-kami' ? 'font-bold text-red-700' : ''
+                      }`}
                     onClick={closeHelpDropdown}
                     role="menuitem"
                   >
@@ -277,9 +272,8 @@ const Navbar: React.FC = () => {
                   </Link>
                   <Link
                     href="/student/FAQ"
-                    className={`block px-4 py-2 text-black hover:bg-gray-100 min-h-[48px] ${
-                      pathname === '/student/FAQ' ? 'font-bold text-red-700' : ''
-                    }`}
+                    className={`block px-4 py-2 text-black hover:bg-gray-100 min-h-[48px] ${pathname === '/student/FAQ' ? 'font-bold text-red-700' : ''
+                      }`}
                     onClick={closeHelpDropdown}
                     role="menuitem"
                   >
@@ -328,9 +322,8 @@ const Navbar: React.FC = () => {
               alt="Arrow"
               width={14}
               height={14}
-              className={`sm:w-5 sm:h-5 transition-transform ${
-                dropdownOpen ? 'rotate-180' : ''
-              }`}
+              className={`sm:w-5 sm:h-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''
+                }`}
               sizes="(max-width: 640px) 14px, 20px"
             />
           </button>
@@ -362,64 +355,58 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md border rounded-b-xl overflow-hidden transition-all duration-500 z-20 ${
-          mobileMenuOpen ? 'max-h-[600px]' : 'max-h-0'
-        }`}
+        className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md border rounded-b-xl overflow-hidden transition-all duration-500 z-20 ${mobileMenuOpen ? 'max-h-[600px]' : 'max-h-0'
+          }`}
       >
         <div className="flex flex-col p-4 space-y-2">
           {isAdmin ? (
             <>
               <Link
                 href="/admin"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  isAdminBeranda
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${isAdminBeranda
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Beranda
               </Link>
               <Link
                 href="/admin/Data"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  isDataActive
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${isDataActive
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Data
               </Link>
               <Link
                 href="/admin/Jadwal"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/admin/Jadwal'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Jadwal'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Jadwal
               </Link>
               <Link
                 href="/admin/Penempatan"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/admin/Penempatan'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Penempatan'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Penempatan
               </Link>
               <Link
                 href="/admin/Media"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/admin/Media'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Media'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Media
@@ -429,55 +416,50 @@ const Navbar: React.FC = () => {
             <>
               <Link
                 href="/Asesor"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/Asesor'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Beranda
               </Link>
               <Link
                 href="/Asesor/data-peserta"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/Asesor/data-peserta'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/data-peserta'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Data Peserta
               </Link>
               <Link
                 href="/Asesor/jadwal"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/Asesor/jadwal'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/jadwal'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Jadwal
               </Link>
               <Link
                 href="/Asesor/skema"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/Asesor/skema'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/skema'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Skema
               </Link>
               <Link
                 href="/Asesor/download"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/Asesor/download'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/download'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Download
@@ -487,44 +469,40 @@ const Navbar: React.FC = () => {
             <>
               <Link
                 href="/student"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/student'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Beranda
               </Link>
               <Link
                 href="/student/HasilAsesmen"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/student/HasilAsesmen'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/HasilAsesmen'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Hasil Asesmen
               </Link>
               <Link
                 href="/student/hubungi-kami"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/student/hubungi-kami'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/hubungi-kami'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 Hubungi Kami
               </Link>
               <Link
                 href="/student/FAQ"
-                className={`px-3 py-2 text-sm font-semibold rounded-md ${
-                  pathname === '/student/FAQ'
+                className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/FAQ'
                     ? 'text-red-700 bg-red-50'
                     : 'text-black hover:bg-gray-100'
-                }`}
+                  }`}
                 onClick={toggleMobileMenu}
               >
                 FAQ

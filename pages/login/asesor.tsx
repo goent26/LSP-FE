@@ -14,11 +14,17 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const passwordRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
+  const [form, setForm] = useState({ email: '', password: '' });
 
   const handleBack = () => {
     router.back();
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -128,6 +134,10 @@ export default function LoginForm() {
                 value={form.email}
                 onChange={handleChange}
                 required
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Email or Number Phone"
                 type="text"
@@ -137,6 +147,10 @@ export default function LoginForm() {
             <div className="mb-4 sm:mb-6">
               <label className="block text-xs sm:text-base font-bold mb-2">Password</label>
               <input
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                required
                 name="password"
                 value={form.password}
                 onChange={handleChange}
