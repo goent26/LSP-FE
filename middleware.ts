@@ -5,28 +5,28 @@ export function middleware(request: NextRequest) {
   const role = request.cookies.get('lsp-role')?.value
 
   const { pathname } = request.nextUrl
+  console.log(pathname, "ini path")
 
   // Redirect ke login jika belum login
-  if (!token && (pathname.startsWith('/student') || pathname.startsWith('/admin') || pathname.startsWith('/asesor'))) {
+  if (!token && (pathname.startsWith('/student') || pathname.startsWith('/admin') || pathname.startsWith('/Asesor') )) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // Role-based access control
-  if (pathname.startsWith('/admin') && role !== 'admin') {
-    return NextResponse.redirect(new URL('/login', request.url))
+   // Redirect antar role kalau akses halaman yang bukan miliknya
+   if (role === 'admin' && (pathname.startsWith('/student') || pathname.startsWith('/Asesor'))) {
+    return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   }
 
-  if (pathname.startsWith('/asesor') && role !== 'asesor') {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (role === 'asesor' && (pathname.startsWith('/admin') || pathname.startsWith('/student'))) {
+    return NextResponse.redirect(new URL('/asesor/dashboard', request.url))
   }
 
-  if (pathname.startsWith('/student') && role !== 'peserta') {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (role === 'peserta' && (pathname.startsWith('/admin') || pathname.startsWith('/Asesor'))) {
+    return NextResponse.redirect(new URL('/student/dashboard', request.url))
   }
-
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/student/:path*', '/admin/:path*', '/asesor/:path*'],
+  matcher: ['/student/:path*', '/admin/:path*', '/Asesor/:path*'],
 }
