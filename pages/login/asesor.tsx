@@ -1,11 +1,17 @@
-'use client'; // jika menggunakan Next.js App Router
+'use client';
 
-import { useRouter } from 'next/navigation'; // Ubah dari next/router ke next/navigation untuk App Router
+import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
+import Image from 'next/image';
+import { login } from '../../Client/AuthClient';
+import { AxiosError } from 'axios';
+import Cookies from 'js-cookie';
 
 export default function LoginForm() {
   const router = useRouter();
   const [showResetPopup, setShowResetPopup] = useState(false);
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const passwordRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
 
@@ -13,11 +19,41 @@ export default function LoginForm() {
     router.back();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login dikirim');
-    // Arahkan ke /Asesor setelah submit
-    router.push('/Asesor');
+    setError('');
+
+    if (!form.email || !form.password) {
+      setError('Email/No HP dan Password wajib diisi.');
+      return;
+    }
+
+    try {
+      const res = await login(form);
+      const { token, user } = res.payload;
+      if (user?.role === 'asesor') {
+        Cookies.set('lsp-token', token, {
+          path: '/',
+          expires: 1,
+        });
+        Cookies.set('lsp-role', user.role, {
+          path: '/',
+          expires: 1,
+        });
+        console.log('Login berhasil!', user, token);
+        router.push('/Asesor');
+      } else {
+        setError(`Anda adalah ${user.role}. Silakan login melalui halaman ${user.role}.`);
+      }
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      setError(err.response?.data?.message || 'Gagal login. Coba lagi.');
+      console.error('Gagal login: ' + err.response?.data?.message);
+    }
   };
 
   const togglePassword = () => {
@@ -29,10 +65,42 @@ export default function LoginForm() {
   return (
     <div className="main-container relative min-h-screen flex items-center justify-center bg-gray-100 font-poppins">
       {/* Background images */}
-      <img src="/form/garis_belakang.png" className="form-bg-line bottom-left back" alt="bg" />
-      <img src="/form/garis_depan.png" className="form-bg-line bottom-left front" alt="fg" />
-      <img src="/form/gariss_belakang.png" className="form-bg-line top-right back" alt="bg" />
-      <img src="/form/gariss_depan.png" className="form-bg-line top-right front" alt="fg" />
+      <Image
+        src="/form/garis_belakang.png"
+        className="form-bg-line bottom-left back"
+        alt="bg"
+        width={100}
+        height={100}
+        fill
+        onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=BG')}
+      />
+      <Image
+        src="/form/garis_depan.png"
+        className="form-bg-line bottom-left front"
+        alt="fg"
+        width={100}
+        height={100}
+        fill
+        onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=FG')}
+      />
+      <Image
+        src="/form/gariss_belakang.png"
+        className="form-bg-line top-right back"
+        alt="bg"
+        width={100}
+        height={100}
+        fill
+        onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=BG')}
+      />
+      <Image
+        src="/form/gariss_depan.png"
+        className="form-bg-line top-right front"
+        alt="fg"
+        width={100}
+        height={100}
+        fill
+        onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=FG')}
+      />
 
       {/* Login box */}
       <div className="login-container rounded-lg overflow-hidden flex flex-col md:flex-row min-h-[200px] sm:min-h-[400px] relative z-10 bg-white shadow-lg">
@@ -48,9 +116,18 @@ export default function LoginForm() {
           </p>
 
           <form className="w-full max-w-xs sm:max-w-md" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-100 text-red-700 text-sm p-2 mb-4 rounded-md text-center">
+                {error}
+              </div>
+            )}
             <div className="mb-4 sm:mb-6">
               <label className="block text-xs sm:text-base font-bold mb-2">Email or Number Phone</label>
               <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Email or Number Phone"
                 type="text"
@@ -60,6 +137,10 @@ export default function LoginForm() {
             <div className="mb-4 sm:mb-6">
               <label className="block text-xs sm:text-base font-bold mb-2">Password</label>
               <input
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                required
                 id="password"
                 ref={passwordRef}
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
@@ -109,10 +190,13 @@ export default function LoginForm() {
         </div>
 
         <div className="hidden md:block md:w-1/2 p-2 bg-white rounded-lg">
-          <img
+          <Image
             src="/backround_login.png"
             alt="Login Illustration"
             className="w-full h-full object-cover rounded-lg"
+            width={400}
+            height={400}
+            onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/400?text=Login')}
           />
         </div>
       </div>
@@ -129,10 +213,13 @@ export default function LoginForm() {
             </button>
             <h3 className="text-lg sm:text-2xl font-bold mb-4 sm:mb-6">Lupa Password</h3>
 
-            <img
+            <Image
               src="/form/Mail.png"
               alt="Mail"
               className="w-52 sm:w-64 mx-auto mb-6 sm:mb-10"
+              width={256}
+              height={256}
+              onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/256?text=Mail')}
             />
 
             <h4 className="text-base sm:text-xl font-semibold text-gray-700 mb-2 sm:mb-4">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -71,7 +72,7 @@ const Download: React.FC = () => {
             </div>
 
             {/* Daftar Dokumen */}
-            <div className="space-y-4">
+            <div className="space-y-10">
               {filteredDocuments.map((doc, index) => (
                 <div
                   key={index}
@@ -83,9 +84,11 @@ const Download: React.FC = () => {
                       onClick={() => toggleExpand(index)}
                       className="bg-red-700 p-2 rounded-full hover:bg-red-800 transition"
                     >
-                      <img
+                      <Image
                         src="/panah-keatas.png"
                         alt="Toggle"
+                        width={20}
+                        height={20}
                         className={`w-5 h-5 transform transition-transform duration-300 ${
                           expandedIndex === index ? 'rotate-180' : ''
                         }`}

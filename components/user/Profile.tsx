@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Profile: React.FC = () => {
   const router = useRouter();
@@ -19,13 +20,24 @@ const Profile: React.FC = () => {
 
       {/* Container */}
       <div className="max-w-4xl mx-auto p-4 space-y-6">
-
         {/* Kotak 1 & 2 */}
         <div className="bg-white rounded-2xl border-2 border-gray-300 shadow-lg overflow-hidden">
           <div className="relative">
-            <img src="/profile-user.png.png" alt="Banner" className="w-full h-48 object-cover" />
+            <Image
+              src="/profile-user.png.png"
+              alt="Banner"
+              width={896}
+              height={192}
+              className="w-full h-48 object-cover"
+            />
             <div className="absolute left-6 -bottom-10">
-              <img src="/contoh-user.png" className="w-24 h-24 rounded-full border-4 border-white object-cover shadow-xl" />
+              <Image
+                src="/contoh-user.png"
+                alt="Profile picture"
+                width={96}
+                height={96}
+                className="w-24 h-24 rounded-full border-4 border-white object-cover shadow-xl"
+              />
             </div>
           </div>
           <div className="pt-5 pb-6 flex items-center justify-start pl-40">
@@ -95,7 +107,6 @@ const Profile: React.FC = () => {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

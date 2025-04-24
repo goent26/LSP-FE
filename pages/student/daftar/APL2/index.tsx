@@ -1,14 +1,18 @@
+// pages/student/daftar/APL2/index.tsx
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Footer from '../../components/user/Footer';
+import Image from 'next/image';
+import Footer from '../../../../components/user/Footer';
 
-const Daftar2 = () => {
+const Daftar = () => {
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (window.location.pathname !== '/student/daftar2') {
-      router.push('/student/daftar2');
+    if (window.location.pathname !== '/student/daftar/APL2') {
+      router.push('/student/daftar/APL2');
     }
     const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles') || '{}');
     setUploadedFiles(storedFiles);
@@ -52,9 +56,11 @@ const Daftar2 = () => {
           />
           {uploadedFiles[fieldKey] ? (
             <div className="relative w-full">
-              <img
+              <Image
                 src={uploadedFiles[fieldKey]}
                 alt={`Uploaded ${label}`}
+                width={200}
+                height={96}
                 className="max-w-full max-h-24 object-contain mx-auto"
               />
               <button
@@ -72,7 +78,13 @@ const Daftar2 = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center">
-              <img src="/download-bukti.png" alt="Upload" className="w-6 h-6" />
+              <Image
+                src="/download-bukti.png"
+                alt="Upload"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
               <span className="text-gray-500 text-sm">
                 Klik untuk mengunggah file <span className="text-red-700 font-semibold">{label}</span>
               </span>
@@ -93,7 +105,13 @@ const Daftar2 = () => {
       </nav>
 
       <div className="container mx-auto mt-6 relative">
-        <img src="/step-indicator.png" alt="Langkah Pendaftaran" className="w-full" />
+        <Image
+          src="/step-indicator.png"
+          alt="Langkah Pendaftaran"
+          width={1200}
+          height={100}
+          className="w-full"
+        />
         <div className="absolute top-1/2 left-0 transform -translate-y-1/2 text-sm font-semibold text-[#8B0000] pl-2">
           Formulir Peserta
         </div>
@@ -144,13 +162,13 @@ const Daftar2 = () => {
         <div className="flex flex-col items-end mt-10 px-4 gap-4">
           <button
             className="bg-[#8B0000] text-white px-6 py-2 rounded-full w-full md:w-auto"
-            onClick={() => router.push('/student/daftar')}
+            onClick={() => router.push('/student/daftar/')}
           >
             Kembali
           </button>
           <button
             className="bg-[#8B0000] text-white px-6 py-2 rounded-full w-full md:w-auto"
-            onClick={() => router.push('/student/daftar/3')}
+            onClick={() => router.push('/student/daftar/APL2/3')}
           >
             Selanjutnya
           </button>
@@ -168,4 +186,4 @@ const Daftar2 = () => {
   );
 };
 
-export default Daftar2;
+export default Daftar;

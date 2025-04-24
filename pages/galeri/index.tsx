@@ -1,6 +1,6 @@
-// pages/galeri/index.tsx
 import React from 'react';
 import Head from 'next/head';
+import Image from 'next/image'; 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -66,11 +66,15 @@ const Galeri: React.FC = () => {
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 w-[360px] mx-auto"
                   key={idx}
                 >
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-[220px] object-cover"
-                  />
+                  <div className="relative w-full h-[220px]">
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="w-full h-[220px]"
+                    />
+                  </div>
                   <div className="p-4 text-center">
                     <p className="font-semibold text-sm sm:text-base uppercase leading-snug">
                       {item.title} <br />
