@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
@@ -27,7 +28,13 @@ const Navbar: React.FC = () => {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center ml-2 md:ml-8">
-          <img src="/icon.png" alt="Logo" className="h-20 w-auto object-contain" />
+          <Image
+            src="/icon.png"
+            alt="Logo"
+            width={80}
+            height={80}
+            className="h-20 w-auto object-contain"
+          />
         </div>
 
         {/* Hamburger Icon on Mobile */}

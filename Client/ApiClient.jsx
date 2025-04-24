@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://143.198.118.227/:8050',
     timeout: 10000,
 });
 
@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use(
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('lsp-token');
             if (token) {
-                config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+                config.headers.Authorization = `Bearer ${token}`;
             }
         }
         return config;

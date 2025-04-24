@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure scrolling for html, body, and #__next */
+html, body, #__next {
+  min-height: 100%;
+  overflow: auto !important;
+}
+
 /* General Styles */
 body {
   font-family: 'Poppins', sans-serif;
@@ -260,16 +266,37 @@ header img {
   min-height: 800px;
 }
 
+/* Tab animations */
 .tab-content {
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .tab-content.active {
   display: block;
+  opacity: 1;
 }
 
 .tab-link {
+  position: relative;
   cursor: pointer;
+  padding-bottom: 4px;
+}
+
+.tab-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #8D0000;
+  transition: width 0.3s ease-in-out;
+}
+
+.tab-link.active::after {
+  width: 100%;
 }
 
 .tab-link.active {
@@ -292,13 +319,14 @@ header img {
   border-collapse: collapse;
 }
 
+/* Table hover animations */
 .skema-row {
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .skema-row:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(141, 0, 0, 0.05);
 }
 
 .skema-badge {
@@ -312,20 +340,7 @@ header img {
   border-radius: 4px;
 }
 
-/* Data Overview Styles */
-.data-overview-title {
-  text-align: left;
-  padding-left: 8rem;
-}
-
-@media (max-width: 768px) {
-  .data-overview-title {
-    text-align: center !important;
-    padding-left: 0 !important;
-  }
-}
-
-/* Popup Styles */
+/* Popup animations */
 .popup {
   display: none;
   position: fixed;
@@ -337,6 +352,7 @@ header img {
   z-index: 2000;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .popup-content {
@@ -344,28 +360,17 @@ header img {
   border-radius: 0.5rem;
   width: 90%;
   max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.popup-header {
-  background-color: #8d0000;
-  color: white;
-  padding: 1rem;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.popup-close {
-  cursor: pointer;
-  font-size: 1.5rem;
+  flex-direction: column;
 }
 
 .popup-body {
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+.popup-content table {
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 /* Login and Register Page Styles */
@@ -550,7 +555,6 @@ footer span {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   background: #f0f0f0; /* Latar belakang abu-abu muda */
 }
 
@@ -652,4 +656,34 @@ input[type="password"] {
   .bg-line {
     width: 20vw;
   }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.4s ease-out;
 }

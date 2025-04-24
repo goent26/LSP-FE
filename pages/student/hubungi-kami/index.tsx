@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/image';  
 import { User, Home, MessageSquare, Mail, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import NavbarUser from '../../../components/user/Navbar';
