@@ -110,7 +110,7 @@ export default function LoginForm() {
         <Image
           src="/form/garis_belakang.png"
           alt="Background Line"
-          layout="fill"
+          fill
           className="form-bg-line bottom-left back"
         />
       </div>
@@ -118,7 +118,7 @@ export default function LoginForm() {
         <Image
           src="/form/garis_depan.png"
           alt="Foreground Line"
-          layout="fill"
+          fill
           className="form-bg-line bottom-left front"
         />
       </div>
@@ -126,7 +126,7 @@ export default function LoginForm() {
         <Image
           src="/form/gariss_belakang.png"
           alt="Background Line"
-          layout="fill"
+          fill
           className="form-bg-line top-right back"
         />
       </div>
@@ -134,7 +134,7 @@ export default function LoginForm() {
         <Image
           src="/form/gariss_depan.png"
           alt="Foreground Line"
-          layout="fill"
+          fill
           className="form-bg-line top-right front"
         />
       </div>
@@ -206,7 +206,7 @@ export default function LoginForm() {
             <div className="flex justify-between gap-4">
               <button
                 type="button"
-                onClick={() => router.back()}
+                onClick={handleBack}
                 className="w-1/2 py-2 px-4 bg-gray-300 hover:bg-gray-400 rounded-md"
                 disabled={loading}
               >
@@ -228,7 +228,7 @@ export default function LoginForm() {
           <Image
             src="/backround_login.png"
             alt="Login Illustration"
-            layout="fill"
+            fill
             objectFit="cover"
             className="rounded-lg"
           />
@@ -250,7 +250,7 @@ export default function LoginForm() {
               <Image
                 src="/form/Mail.png"
                 alt="Mail"
-                layout="fill"
+                fill
                 objectFit="contain"
               />
             </div>

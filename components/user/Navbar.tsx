@@ -91,12 +91,6 @@ const Navbar: React.FC = () => {
   const isAdminBeranda = pathname === '/admin' || pathname === '/admin/';
   const isDataActive = pathname.startsWith('/admin/Data');
 
-  const handleLogout = () => {
-    Cookies.remove('lsp-token', { path: '/' })
-    Cookies.remove('lsp-role', { path: '/' })
-    router.push('/login') // pindah ke halaman login
-  }
-
   return (
     <nav
       className={`flex justify-between items-center px-4 sm:px-6 py-3 bg-white shadow-md ${poppins.className}`}
@@ -364,8 +358,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/admin"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${isAdminBeranda
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -374,8 +368,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/admin/Data"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${isDataActive
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -384,8 +378,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/admin/Jadwal"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Jadwal'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -394,8 +388,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/admin/Penempatan"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Penempatan'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -404,8 +398,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/admin/Media"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/admin/Media'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -417,8 +411,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/Asesor"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -427,8 +421,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/Asesor/data-peserta"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/data-peserta'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -437,8 +431,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/Asesor/jadwal"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/jadwal'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -447,8 +441,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/Asesor/skema"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/skema'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -457,8 +451,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/Asesor/download"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/Asesor/download'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -470,8 +464,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/student"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -480,8 +474,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/student/HasilAsesmen"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/HasilAsesmen'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -490,8 +484,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/student/hubungi-kami"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/hubungi-kami'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >
@@ -500,8 +494,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/student/FAQ"
                 className={`px-3 py-2 text-sm font-semibold rounded-md ${pathname === '/student/FAQ'
-                    ? 'text-red-700 bg-red-50'
-                    : 'text-black hover:bg-gray-100'
+                  ? 'text-red-700 bg-red-50'
+                  : 'text-black hover:bg-gray-100'
                   }`}
                 onClick={toggleMobileMenu}
               >

@@ -134,7 +134,11 @@ export default function LoginForm() {
               <label className="block text-xs sm:text-base font-bold mb-2">Password</label>
               <input
                 id="password"
+                name='password'
                 ref={passwordRef}
+                value={form.password}
+                onChange={handleChange}
+                required
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Password"
                 type="password"

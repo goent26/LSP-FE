@@ -14,15 +14,15 @@ export function middleware(request: NextRequest) {
 
    // Redirect antar role kalau akses halaman yang bukan miliknya
    if (role === 'admin' && (pathname.startsWith('/student') || pathname.startsWith('/Asesor'))) {
-    return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+    return NextResponse.redirect(new URL('/admin', request.url))
   }
 
   if (role === 'asesor' && (pathname.startsWith('/admin') || pathname.startsWith('/student'))) {
-    return NextResponse.redirect(new URL('/asesor/dashboard', request.url))
+    return NextResponse.redirect(new URL('/asesor', request.url))
   }
 
   if (role === 'peserta' && (pathname.startsWith('/admin') || pathname.startsWith('/Asesor'))) {
-    return NextResponse.redirect(new URL('/student/dashboard', request.url))
+    return NextResponse.redirect(new URL('/student', request.url))
   }
   return NextResponse.next()
 }

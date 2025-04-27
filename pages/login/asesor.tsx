@@ -14,17 +14,12 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const passwordRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
-  const [form, setForm] = useState({ email: '', password: '' });
+
 
   const handleBack = () => {
     router.back();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -77,7 +72,6 @@ export default function LoginForm() {
         alt="bg"
         width={100}
         height={100}
-        fill
         onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=BG')}
       />
       <Image
@@ -86,7 +80,6 @@ export default function LoginForm() {
         alt="fg"
         width={100}
         height={100}
-        fill
         onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=FG')}
       />
       <Image
@@ -95,7 +88,6 @@ export default function LoginForm() {
         alt="bg"
         width={100}
         height={100}
-        fill
         onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=BG')}
       />
       <Image
@@ -104,7 +96,6 @@ export default function LoginForm() {
         alt="fg"
         width={100}
         height={100}
-        fill
         onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/100?text=FG')}
       />
 
@@ -134,10 +125,6 @@ export default function LoginForm() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Email or Number Phone"
                 type="text"
@@ -151,11 +138,6 @@ export default function LoginForm() {
                 value={form.password}
                 onChange={handleChange}
                 required
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                required
-                id="password"
                 ref={passwordRef}
                 className="w-full px-4 py-2 text-sm sm:text-lg border rounded-full focus:outline-none focus:ring-2 focus:ring-red-700"
                 placeholder="Password"

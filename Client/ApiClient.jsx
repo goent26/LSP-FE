@@ -1,21 +1,20 @@
-import axios from 'axios';
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const axiosInstance = axios.create({
-    baseURL: 'http://143.198.118.227/:8050',
+    baseURL: 'http://localhost:8000/api',
     timeout: 10000,
-});
+})
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('lsp-token');
-            if (token) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
+        const token = Cookies.get('lsp-token')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
         }
-        return config;
+        return config
     },
     (error) => Promise.reject(error)
-);
+)
 
-export default axiosInstance;
+export default axiosInstance

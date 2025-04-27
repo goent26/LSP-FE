@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '../../../components/user/Navbar';
 import Footer from '../../../components/user/Footer';
+import { AxiosError } from 'axios';
+import SkemaClient from '@/Client/SkemaClient';
+import { PesertaClient, AsesorClient } from '@/Client/UserClient';
+import TukClient from '@/Client/TukClient'
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('Peserta');
@@ -16,22 +20,140 @@ export default function Admin() {
   const itemsPerPage = 10;
   const router = useRouter();
 
+  // Get All Skema
+  interface Skema {
+    id: string;
+    judul_skema: string;
+    nomor_skema: string;
+    jenis: string;
+  }
+  interface TableRow {
+    columns: string[];
+    actions: string[];
+  }
+
+  const [tableRowsSkema, setTableRowsSkema] = useState<TableRow[]>([]);
+  const [tableRowsPeserta, setTableRowsPeserta] = useState<TableRow[]>([]);
+  const [TableRowsAsesor, setTableRowsAsesor] = useState<TableRow[]>([]);
+  const [TableRowsTUK, setTableRowsTUK] = useState<TableRow[]>([]);
+
+  const fetchDataSkema = async () => {
+    try {
+      const fetchSkema = await SkemaClient.getAll();
+      const skemaData = fetchSkema?.payload?.data as Skema[];
+      // console.log(skemaData, 'skema data dari backend');
+
+      const formattedRows = skemaData.map((item, index) => ({
+        columns: [
+          (index + 1).toString(),
+          item.judul_skema,
+          item.jenis.charAt(0).toUpperCase() + item.jenis.slice(1), // Kapitalisasi pertama
+        ],
+        actions: ['edit', 'copy', 'delete'],
+      }));
+
+      setTableRowsSkema(formattedRows);
+    } catch (err) {
+      console.error('Gagal mengambil data skema:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataSkema();
+  }, []);
+
+  const fetchDataPeserta = async () => {
+    try {
+      const fetchPeserta = await PesertaClient.getAll()
+
+      const formattedRows = fetchPeserta.map((item, index) => ({
+        columns: [
+          (index + 1).toString(),
+          item.email,
+          item.username,
+          item.nik || '-', // fallback kalau nik belum ada
+          item.skema || '-', // fallback juga
+        ],
+        actions: ['edit', 'delete'],
+      }))
+      setTableRowsPeserta(formattedRows)
+    } catch (err) {
+      console.error('Gagal mengambil data peserta:', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchDataPeserta()
+  }, [])
+
+  const fetchDataAsesor = async () => {
+    try {
+      const fetchAsesor = await AsesorClient.getAll()
+
+      const formattedRows = fetchAsesor.map((item, index) => ({
+        columns: [
+          (index + 1).toString(),
+          item.email,
+          item.username,
+          `REG 1`,
+          'SMK 1',
+          'Web Development',
+          '2025-12-31',
+        ],
+        actions: ['edit', 'delete'],
+      }))
+      setTableRowsAsesor(formattedRows)
+    } catch (err) {
+      console.error('Gagal mengambil data Asesor:', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchDataAsesor()
+  }, [])
+
+  const fetchDataTUK = async () => {
+    try {
+      const fetchTUK = await TukClient.getAll()
+
+      const formattedRows = fetchTUK.map((item, index) => ({
+        columns: [
+          (index + 1).toString(),
+          item.skema?.judul_skema || '-',            // Nama Skema (dari relasi)
+          item.jenis,                        // Jenis TUK (bukan username, karena TUK ga ada username)
+          item.nama_tuk,
+          item.alamat,                        // Alamat TUK
+        ],
+        actions: ['edit', 'delete'],
+      }))
+
+      setTableRowsTUK(formattedRows)
+    } catch (err) {
+      console.error('Gagal mengambil data TUK:', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchDataTUK()
+  }, [])
+
   const pages = [
     {
       name: 'Peserta',
       searchPlaceholder: 'Cari Peserta',
       addButtonLabel: 'Tambah Peserta',
       tableHeaders: ['No', 'Email', 'Nama Peserta', 'NIK', 'Skema', 'Aksi'],
-      tableRows: Array.from({ length: 12 }, (_, i) => ({
-        columns: [
-          `${i + 1}`,
-          `peserta${i + 1}@example.com`,
-          `Peserta ${i + 1}`,
-          `12345678901234${i}`,
-          'Web Developer',
-        ],
-        actions: ['edit', 'delete'],
-      })),
+      tableRows: tableRowsPeserta
+      // tableRows: Array.from({ length: 12 }, (_, i) => ({
+      //   columns: [
+      //     `${i + 1}`,
+      //     `peserta${i + 1}@example.com`,
+      //     `Peserta ${i + 1}`,
+      //     `12345678901234${i}`,
+      //     'Web Developer',
+      //   ],
+      //   actions: ['edit', 'delete'],
+      // })),
     },
     {
       name: 'Asesor',
@@ -47,42 +169,45 @@ export default function Admin() {
         'Masa Berlaku',
         'Aksi',
       ],
-      tableRows: Array.from({ length: 11 }, (_, i) => ({
-        columns: [
-          `${i + 1}`,
-          `asesor${i + 1}@example.com`,
-          `Asesor ${i + 1}`,
-          `REG${i + 1}`,
-          'SMK 1',
-          'Web Development',
-          '2025-12-31',
-        ],
-        actions: ['edit', 'delete'],
-      })),
+      tableRows: TableRowsAsesor
+      // tableRows: Array.from({ length: 11 }, (_, i) => ({
+      //   columns: [
+      //     `${i + 1}`,
+      //     `asesor${i + 1}@example.com`,
+      //     `Asesor ${i + 1}`,
+      //     `REG${i + 1}`,
+      //     'SMK 1',
+      //     'Web Development',
+      //     '2025-12-31',
+      //   ],
+      //   actions: ['edit', 'delete'],
+      // })),
     },
     {
       name: 'Skema',
       searchPlaceholder: 'Cari Skema',
       addButtonLabel: 'Tambah Skema',
       tableHeaders: ['No', 'Judul Skema', 'Jenis', 'Aksi'],
-      tableRows: [
-        {
-          columns: ['1', 'Web Developer', 'Klaster'],
-          actions: ['edit', 'copy', 'delete'],
-        },
-      ],
+      tableRows: tableRowsSkema
+      // tableRows: [
+      //   {
+      //     columns: ['1', 'Web Developer', 'Klaster'],
+      //     actions: ['edit', 'copy', 'delete'],
+      //   },
+      // ],
     },
     {
       name: 'TUK',
       searchPlaceholder: 'Cari TUK',
       addButtonLabel: 'Tambah TUK',
       tableHeaders: ['No', 'Judul Skema', 'Jenis', 'Nama TUK', 'Alamat', 'Aksi'],
-      tableRows: [
-        {
-          columns: ['1', 'Web Developer', 'Klaster', 'Lab DKV', 'Jl. Contoh 123'],
-          actions: ['edit', 'delete'],
-        },
-      ],
+      tableRows: TableRowsTUK
+      // tableRows: [
+      //   {
+      //     columns: ['1', 'Web Developer', 'Klaster', 'Lab DKV', 'Jl. Contoh 123'],
+      //     actions: ['edit', 'delete'],
+      //   },
+      // ],
     },
     {
       name: 'MUK',
@@ -133,6 +258,97 @@ export default function Admin() {
   const showPagination = totalItems >= 10;
 
   const Modal = () => {
+    const [formUser, setFormUser] = useState({ email: '', password: '', username: '' });
+
+    const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormUser({ ...formUser, [e.target.name]: e.target.value });
+    };
+
+    const handleCreateUser = async (e: React.FormEvent, role: 'peserta' | 'asesor') => {
+      e.preventDefault();
+
+      // Validasi form
+      if (!formUser.email || !formUser.password || !formUser.username) {
+        setError('Semua field harus diisi');
+        return;
+      }
+
+      const payload = {
+        email: formUser.email,
+        password: formUser.password,
+        username: formUser.username,
+      };
+
+      try {
+        let response
+        if (role === 'peserta') {
+          response = await PesertaClient.createOne(payload);
+        } else if (role === 'asesor') {
+          response = await AsesorClient.createOne(payload);
+        }
+        // const response = await PesertaClient.createOne(payload);
+        console.log('Peserta created:', response);
+
+        // Reset form
+        setFormUser({ email: '', password: '', username: '' });
+        setError('');
+        closeModal();
+        fetchDataPeserta();
+        fetchDataAsesor();
+        alert('Peserta berhasil ditambahkan!');
+      } catch (err) {
+        const axiosError = err as AxiosError<{ message: string }>;
+        setError(axiosError.response?.data?.message || 'Terjadi kesalahan. Coba lagi.');
+      }
+    };
+
+
+    // SKEMA START
+    // Create Skema
+    const [judulSkema, setJudulSkema] = useState('');
+    const [nomorSkema, setNomorSkema] = useState('');
+    const [jenisSkema, setJenisSkema] = useState('');
+    const [error, setError] = useState('');
+    console.log(error)
+    console.log(judulSkema, nomorSkema, jenisSkema, 'nih console')
+
+    const handleCreateSkema = async (e: React.FormEvent) => {
+      e.preventDefault();
+      console.log('nih ke create skema')
+      // Validasi form
+      if (!judulSkema || !nomorSkema || !jenisSkema) {
+        setError('Semua field harus diisi');
+        return;
+      }
+
+      const payload = {
+        judul_skema: judulSkema,
+        nomor_skema: nomorSkema,
+        jenis: jenisSkema.toLowerCase(),
+      };
+
+      try {
+        // Memanggil API untuk membuat skema baru
+        const response = await SkemaClient.createOne(payload);
+        console.log('Skema created:', response);
+
+        setShowModal(false);
+        setJudulSkema('');
+        setNomorSkema('');
+        setJenisSkema('');
+        setError('');
+        fetchDataSkema()
+        alert('Skema berhasil dibuat');
+      } catch (err) {
+        // Menangani error yang terjadi saat API call
+        const axiosError = err as AxiosError<{ message: string }>;
+        setError(axiosError.response?.data?.message || 'Terjadi kesalahan. Coba lagi.');
+      }
+    };
+    // SKEMA END
+
+    // const [formTUK, setFormTUK] = useState({ namaTUK :'', kodeTUK :'', alamat :'', jenis:'', skemaId:'' })
+
     const closeModal = () => {
       setShowModal(false);
       setSelectedRowIndex(null); // Reset index on close
@@ -151,6 +367,7 @@ export default function Admin() {
 
     switch (modalType) {
       case 'tambahPeserta':
+        console.log()
         return (
           <div className="fixed inset-0 bg-gray-700/75 flex items-center justify-center p-4 z-50 overflow-y-auto">
             <div className="w-full max-w-3xl sm:max-w-4xl rounded-xl bg-white font-['Inter'] shadow-2xl transform transition-all duration-300">
@@ -183,6 +400,9 @@ export default function Admin() {
                     id="email"
                     type="email"
                     placeholder="Email"
+                    name="email"
+                    value={formUser.email}
+                    onChange={handleChangeUser}
                     className="w-full border border-gray-300 rounded-md px-4 py-3 text-gray-400 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
                 </div>
@@ -196,6 +416,9 @@ export default function Admin() {
                   <input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={formUser.password}
+                    onChange={handleChangeUser}
                     placeholder="Password"
                     className="w-full border border-gray-300 rounded-md px-4 py-3 text-gray-400 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
@@ -225,6 +448,9 @@ export default function Admin() {
                   <input
                     id="nama-peserta"
                     type="text"
+                    name="username"
+                    value={formUser.username}
+                    onChange={handleChangeUser}
                     placeholder="Nama Lengkap"
                     className="w-full border border-gray-300 rounded-md px-4 py-3 text-gray-400 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
@@ -233,7 +459,7 @@ export default function Admin() {
               <div className="bg-gray-100 px-6 py-5 rounded-b-xl flex justify-end">
                 <button
                   type="submit"
-                  onClick={closeModal}
+                  onClick={(e) => handleCreateUser(e, 'peserta')}
                   className="bg-[#8B0B0B] text-white text-sm font-semibold tracking-widest rounded-full px-8 py-2 focus:outline-none hover:bg-[#7a0a0a] transition transform hover:scale-105"
                 >
                   Simpan
@@ -406,6 +632,9 @@ export default function Admin() {
                     id="email"
                     type="email"
                     placeholder="Email"
+                    name="email"
+                    value={formUser.email}
+                    onChange={handleChangeUser}
                     className="w-full border border-gray-300 rounded-md text-[11px] placeholder:text-[11px] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
                 </div>
@@ -419,6 +648,9 @@ export default function Admin() {
                   <input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={formUser.password}
+                    onChange={handleChangeUser}
                     placeholder="Password"
                     className="w-full border border-gray-300 rounded-md text-[11px] placeholder:text-[11px] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
@@ -459,6 +691,9 @@ export default function Admin() {
                   <input
                     id="nama-asesor"
                     type="text"
+                    name="username"
+                    value={formUser.username}
+                    onChange={handleChangeUser}
                     placeholder="Nama Lengkap"
                     className="w-full border border-gray-300 rounded-md text-[11px] placeholder:text-[11px] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#8B0B0B] transition"
                   />
@@ -467,7 +702,7 @@ export default function Admin() {
               <div className="bg-[#F0F0F0] px-6 py-4 rounded-b-xl flex justify-end">
                 <button
                   type="submit"
-                  onClick={closeModal}
+                  onClick={(e) => handleCreateUser(e, 'asesor')}
                   className="bg-[#8B0B0B] text-white text-[11px] font-semibold tracking-widest rounded-full px-6 py-2 hover:bg-[#6e0808] focus:outline-none transition transform hover:scale-105"
                 >
                   Simpan
@@ -595,7 +830,7 @@ export default function Admin() {
 
       case 'tambahSkema':
         return (
-          <div className="fixed inset-0 bg-[#F8F8F8]/75 flex items-center justify-center p-4 z-50 overflow-y-auto">
+          <div className="fixed inset-0 bg-[#F8F8F8]/75 flex items-center justify-center p-4 z-50 overflow-y-auto" onSubmit={handleCreateSkema}>
             <div className="w-full max-w-4xl rounded-2xl bg-white font-['Inter'] shadow-2xl transform transition-all duration-300">
               <header className="bg-[#8B0007] flex justify-between items-center px-6 py-5 rounded-t-2xl">
                 <div>
@@ -615,7 +850,12 @@ export default function Admin() {
                 </button>
               </header>
               <main className="px-6 py-8">
-                <form className="space-y-8 max-w-3xl mx-auto">
+                <form className="space-y-8 max-w-3xl mx-auto" onSubmit={handleCreateSkema}>
+                  {error && (
+                    <div className="bg-red-100 text-red-700 text-sm p-2 mb-4 rounded-md text-center">
+                      {error}
+                    </div>
+                  )}
                   <div>
                     <label
                       htmlFor="judul-skema"
@@ -626,6 +866,25 @@ export default function Admin() {
                     <input
                       id="judul-skema"
                       type="text"
+                      name="judul-skema"
+                      value={judulSkema}
+                      onChange={(e) => setJudulSkema(e.target.value)}
+                      placeholder="Judul Skema"
+                      className="w-full border border-gray-400 rounded-md px-4 py-3 placeholder-gray-400 text-sm tracking-widest font-normal focus:outline-none focus:ring-2 focus:ring-[#8B0007] transition"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="nomor-skema"
+                      className="block text-black font-semibold text-sm tracking-widest mb-2"
+                    >
+                      Nomor Skema
+                    </label>
+                    <input
+                      id="nomor-skema"
+                      type="text"
+                      value={nomorSkema}
+                      onChange={(e) => setNomorSkema(e.target.value)}
                       placeholder="Judul Skema"
                       className="w-full border border-gray-400 rounded-md px-4 py-3 placeholder-gray-400 text-sm tracking-widest font-normal focus:outline-none focus:ring-2 focus:ring-[#8B0007] transition"
                     />
@@ -641,11 +900,11 @@ export default function Admin() {
                       <select
                         id="jenis-skema"
                         className="w-full border border-gray-400 rounded-md px-4 py-3 text-sm font-normal appearance-none focus:outline-none focus:ring-2 focus:ring-[#8B0007] transition"
+                        value={jenisSkema}
+                        onChange={(e) => setJenisSkema(e.target.value)}
                       >
-                        <option disabled selected hidden>
-                          Jenis Skema
-                        </option>
-                        <option>KKNI</option>
+                        <option disabled value="">Jenis Skema</option>
+                        <option>KNNI</option>
                         <option>Okupasi</option>
                         <option>Klaster</option>
                       </select>
@@ -660,8 +919,8 @@ export default function Admin() {
               <footer className="bg-[#F8F8F8] px-6 py-6 rounded-b-2xl flex justify-end">
                 <button
                   type="submit"
-                  onClick={closeModal}
                   className="bg-[#8B0007] text-white font-semibold text-sm tracking-widest rounded-full px-10 py-3 hover:bg-[#6a0003] focus:outline-none transition transform hover:scale-105"
+                  onClick={handleCreateSkema}
                 >
                   Simpan
                 </button>
@@ -1177,11 +1436,10 @@ export default function Admin() {
                 setCurrentPage(1);
                 setSearchQuery('');
               }}
-              className={`focus:outline-none pb-1 transition-all duration-200 ${
-                activeTab === page.name
-                  ? 'border-b-2 border-white'
-                  : 'hover:text-gray-200'
-              }`}
+              className={`focus:outline-none pb-1 transition-all duration-200 ${activeTab === page.name
+                ? 'border-b-2 border-white'
+                : 'hover:text-gray-200'
+                }`}
             >
               {page.name}
             </button>
@@ -1257,13 +1515,11 @@ export default function Admin() {
                 {currentPageData.tableHeaders.map((header, index) => (
                   <th
                     key={index}
-                    className={`px-2 sm:px-4 py-2 text-center whitespace-nowrap ${
-                      index === 0
-                        ? 'border-none w-10 sm:w-12'
-                        : `border-x border-gray-300 ${
-                            header === 'Aksi' ? 'w-16 sm:w-20' : ''
-                          }`
-                    }`}
+                    className={`px-2 sm:px-4 py-2 text-center whitespace-nowrap ${index === 0
+                      ? 'border-none w-10 sm:w-12'
+                      : `border-x border-gray-300 ${header === 'Aksi' ? 'w-16 sm:w-20' : ''
+                      }`
+                      }`}
                   >
                     {header}
                   </th>
@@ -1296,8 +1552,8 @@ export default function Admin() {
                               action === 'edit'
                                 ? `edit${activeTab}`
                                 : action === 'delete'
-                                ? `delete${activeTab}`
-                                : action
+                                  ? `delete${activeTab}`
+                                  : action
                             );
                             if (action === 'edit' || action === 'delete') {
                               setSelectedRowIndex(row.originalIndex);
@@ -1306,15 +1562,14 @@ export default function Admin() {
                             setShowPassword(false);
                           }
                         }}
-                        className={`p-1 sm:p-2 rounded text-white transition transform hover:scale-110 ${
-                          action === 'edit'
-                            ? 'bg-yellow-400 hover:bg-yellow-500'
-                            : action === 'delete'
+                        className={`p-1 sm:p-2 rounded text-white transition transform hover:scale-110 ${action === 'edit'
+                          ? 'bg-yellow-400 hover:bg-yellow-500'
+                          : action === 'delete'
                             ? 'bg-[#8B0B0B] hover:bg-[#6e0808]'
                             : action === 'copy'
-                            ? 'bg-green-700 hover:bg-green-800'
-                            : 'bg-green-700 hover:bg-green-800'
-                        }`}
+                              ? 'bg-green-700 hover:bg-green-800'
+                              : 'bg-green-700 hover:bg-green-800'
+                          }`}
                       >
                         {action === 'edit' ? (
                           <svg
@@ -1413,11 +1668,10 @@ export default function Admin() {
               <button
                 key={pageNum}
                 aria-current={currentPage === pageNum ? 'page' : undefined}
-                className={`border border-gray-300 rounded px-3 py-1 transition ${
-                  currentPage === pageNum
-                    ? 'text-[#8B0B0B] bg-white'
-                    : 'hover:bg-gray-100'
-                } focus:outline-none focus:ring-2 focus:ring-[#8B0B0B]`}
+                className={`border border-gray-300 rounded px-3 py-1 transition ${currentPage === pageNum
+                  ? 'text-[#8B0B0B] bg-white'
+                  : 'hover:bg-gray-100'
+                  } focus:outline-none focus:ring-2 focus:ring-[#8B0B0B]`}
                 onClick={() => setCurrentPage(pageNum)}
               >
                 {pageNum}
